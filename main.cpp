@@ -2,15 +2,18 @@
 #include <fstream>
 #include <iomanip>
 #include <vector>
+#include <sstream>
+
 
 class Tower{
     std::string name;
     bool metal;
     bool camo;
+    bool hype;
 
 public:
-    Tower(std::string xName, bool xMetal, bool xCamo): 
-    name(xName), metal(xMetal), camo(xCamo){
+    Tower(std::string xName, bool xMetal, bool xCamo, bool xHype): 
+    name(xName), metal(xMetal), camo(xCamo), hype(xHype){
         
         
     }
@@ -19,7 +22,7 @@ public:
     std::string getName(){return name;}
     bool getMetal(){return metal;}
     bool getCamo(){return camo;}
-
+    bool getHype(){return hype;}
 
 };
 
@@ -27,8 +30,56 @@ public:
 int main(){
     const int FW = 20;
 
+    std::vector<Tower> towerList;
 
-    
+    std::ifstream inFile;
+    const std::string FILE_NAME = "towers.txt";
+
+
+    //open file
+    inFile.open(FILE_NAME);
+
+
+    //if it isnt opening, shut program down
+    if(!inFile.is_open()){
+        std::cout << "Error opening file.";
+        return 0;
+    }
+
+
+
+    std::string line;
+
+    while(std::getline(inFile, line)){//while inFile is getting a sampleName
+
+        std::istringstream iss(line);
+        std::string name;
+        bool metal;
+        bool camo;
+        bool hype;
+
+        std::getline(iss, name, ',');
+        
+
+        //if its the first line (headers)
+        if(name == "name")
+            continue;
+
+        iss >> metal;
+        iss >> camo;
+        iss >> hype;
+
+        std::cout << name << ' ' << metal << ' ' << camo << ' ' << hype << '\n';
+        std::cin.get();
+
+        Tower sampleTower(name, metal, camo, hype);
+
+    }
+            
+
+
+
+
     std::cout << std::left;
     std::cout << "\n\n";
 

@@ -1,1 +1,22 @@
-name    metal   camo
+name,       metal   camo hype
+Buccaneer       1       1   0
+Submarine       1       1   1
+Banana Farm,    0   0     0
+Dart Monkey,    1   1     0
+Wizard, 1   1   0
+Ninja,  1   1   1
+Helicopter, 1   1   0
+Super Monkey,   1   0   0
+Engineer,   1   1   1
+Boomerang,  1   0   1
+Gattling,   1   1   1
+Spike Factory,  1   1   0
+Cannon, 1   0   0
+Glue Monkey,    1   0   1   
+Bloon Chipper,  1   0   1
+Monkey Hut, 0   0   0
+Sniper Monkey,  1   1   1
+Tack Shooter,   1   0   1
+Ice Monkey,     1   0   0
+Monkey Ace,     1   1   1
+Mortar,     1   1   1
