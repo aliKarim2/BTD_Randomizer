@@ -7,21 +7,19 @@
 
 class Tower{
     std::string name;
-    bool metal;
-    bool camo;
-    bool hype;
+    bool popsAll;   //if tower can pop all types of balloons 
+    bool hype;  //if tower is fun to use    
 
 public:
-    Tower(std::string xName, bool xMetal, bool xCamo, bool xHype): 
-    name(xName), metal(xMetal), camo(xCamo), hype(xHype){
+    Tower(std::string xName, bool xPopsAll, bool xHype): 
+    name(xName), popsAll(xPopsAll), hype(xHype){
         
         
     }
 
 
     std::string getName(){return name;}
-    bool getMetal(){return metal;}
-    bool getCamo(){return camo;}
+    bool getPopsAll(){return popsAll;}
     bool getHype(){return hype;}
 
 };
@@ -54,8 +52,7 @@ int main(){
 
         std::istringstream iss(line);
         std::string name;
-        bool metal;
-        bool camo;
+        bool popsAll;
         bool hype;
 
         std::getline(iss, name, ',');
@@ -65,14 +62,13 @@ int main(){
         if(name == "name")
             continue;
 
-        iss >> metal;
-        iss >> camo;
+        iss >> popsAll;
         iss >> hype;
 
-        std::cout << name << ' ' << metal << ' ' << camo << ' ' << hype << '\n';
+        std::cout << name << ' ' << popsAll << ' ' << hype << '\n';
         std::cin.get();
 
-        Tower sampleTower(name, metal, camo, hype);
+        Tower sampleTower(name, popsAll, hype);
 
     }
             
