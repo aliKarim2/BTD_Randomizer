@@ -1,23 +1,22 @@
-Name metal/camo hype
-Buccaneer 1 1
-Submarine 1 1
-Wizard 1 0
-Ninja 1 0
-Banana farm 0 0
-Helicopter 1 0
-Supermonkey 0 1
-Engineer 1 1
-Submarine 1 1
-Boomerang 0 1
-Cobra 0 0
-Gattling 1 0
-Spike Factory 0 1
-Cannon 0 1
-Dart 1 0
-Chipper 0 1
-Hut 0 1
-Sniper 0 1
-Tack Shooter 0 1
-Ice Monkey 0 1
-Ace 0 1
-Mortar 0 1
+Name, metal/camo hype
+Buccaneer, 1 1
+Submarine, 1 1
+Wizard, 1 0
+Ninja, 1 0
+Banana farm, 0 0
+Helicopter, 1 0
+Supermonkey, 0 1
+Engineer, 1 1
+Boomerang, 0 1
+Cobra, 0 0
+Gattling, 1 0
+Spike Factory, 0 1
+Cannon, 0 1
+Dart Monkey, 1 0
+Bloon Chipper, 0 1
+Monkey Hut, 0 1
+Sniper, 0 1
+Tack Shooter, 0 1
+Ice Monkey, 0 1
+Monkey Ace, 0 1
+Mortar, 0 1
