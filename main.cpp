@@ -4,7 +4,7 @@
 #include <vector>
 #include <sstream>
 #include <random>
-
+#include <algorithm>
 
 class Tower{
     std::string name;
@@ -28,18 +28,23 @@ public:
 
 
 int getRandomInt(int start, int end);
-int getRandomInt(int start, int end, std::vector<int> used);
+int getRandomInt(int start, int end, std::vector<int>& used);
 
 
 int main(){
     const int FW = 20;
 
-    std::vector<Tower> towerList;
+    std::vector<Tower> towerList;               //list of all towers
+    std::vector<Tower> popsAllTowerList;        //list of popsAll towers
+    std::vector<Tower> hypeTowerList;           //list of hype towers
 
+
+    //player inventories
     Tower p1Towers[3];
     Tower p2Towers[3];
 
 
+    //data file variables
     std::ifstream inFile;
     const std::string FILE_NAME = "towers.txt";
 
@@ -70,8 +75,8 @@ int main(){
             
 
             //if its the first line (headers)
-            if(name == "Name")
-                continue;
+            if(name == "Name") 
+                continue;//we dont want it in our lists
 
             iss >> popsAll;
             iss >> hype;
@@ -79,20 +84,33 @@ int main(){
 
             Tower sampleTower(name, popsAll, hype);
 
-            //add the tower to big tower list so it will eventually have all towers from file
+
+
+            //Add towers to their belonging lists
+            if(popsAll)
+                popsAllTowerList.push_back(sampleTower);
+            if(hype)
+                hypeTowerList.push_back(sampleTower);
+
+            //towerList is the general list that gets all towers
             towerList.push_back(sampleTower);
 
         }
     }
     
-    //Fill player towers randomly
     
         
     const int PLAYER_LOADOUT_SIZE = 3;
-    const int TOWER_CT = towerList.size();
+    const int TOWER_CT = towerList.size()-1;
 
     std::vector<int> p1UsedIndexes;
     std::vector<int> p2UsedIndexes;
+
+        /*PLAYER LOADOUT FORMATTING
+        FIRST ELEMENT:      popsAll
+        SECOND ELEMENT:     hype
+        THIRD ELEMENT:      any tower
+        */        
 
 
     for(int i = 0; i < PLAYER_LOADOUT_SIZE; i++){
@@ -100,6 +118,8 @@ int main(){
         int p1Index = getRandomInt(0, TOWER_CT, p1UsedIndexes); //get a new, random tower that is not in p1's loadout (avoid dupes)
 
          p1Towers[i] = towerList[p1Index]; //add that tower to p1's loadout
+        // std::cout << "Adding " << towerList[p1Index].getName() << '\n';
+
 
         p1UsedIndexes.push_back(p1Index); //now that we used p1Index, we need to update the "used" towers
 
@@ -113,8 +133,8 @@ int main(){
     }
 
 
-
-            
+    // std::cin.get();
+    // return 0;
 
 
     //Output Data
@@ -124,18 +144,18 @@ int main(){
 
         //output all of player 1's towers
         std::cout << "PLAYER 1:\n";
-        std::cout << "Tower 1: " << std::right << std::setw(FW) << p1Towers->getName << '\n';
-        std::cout << "Tower 2: " << std::right << std::setw(FW) << "YYYYY" << '\n';
-        std::cout << "Tower 3: " << std::right << std::setw(FW) << "ZZZZZ" << '\n';
+        std::cout << "Tower 1: " << std::right << std::setw(FW) << p1Towers[0].getName() << '\n';
+        std::cout << "Tower 2: " << std::right << std::setw(FW) << p1Towers[1].getName() << '\n';
+        std::cout << "Tower 3: " << std::right << std::setw(FW) << p1Towers[2].getName() << '\n';
 
         std::cout << std::setw(50) << std::setfill('-') << "" << std::endl;    //line barrier
         std::cout<< std::setfill(' ') << std::setw(0)  << "";    //line barrier end
 
         //output all of player 2's towers
         std::cout << "PLAYER 2:\n";
-        std::cout << "Tower 1: " << std::right << std::setw(FW) << "XXXXX" << '\n';
-        std::cout << "Tower 2: " << std::right << std::setw(FW) << "YYYYY" << '\n';
-        std::cout << "Tower 3: " << std::right << std::setw(FW) << "ZZZZZ" << '\n';
+        std::cout << "Tower 1: " << std::right << std::setw(FW) << p2Towers[0].getName() << '\n';
+        std::cout << "Tower 2: " << std::right << std::setw(FW) << p2Towers[1].getName() << '\n';
+        std::cout << "Tower 3: " << std::right << std::setw(FW) << p2Towers[2].getName() << '\n';
 
 
 
@@ -164,7 +184,7 @@ int getRandomInt(int start, int end){
             // Generate and print a random number
             return distribution(gen);
         }
-int getRandomInt(int start, int end, std::vector<int> used){
+int getRandomInt(int start, int end, std::vector<int>& used){
             int num;
             // Set up a random number generator
             static std::random_device rd;  // Use hardware entropy if available
