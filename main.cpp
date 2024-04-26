@@ -138,35 +138,40 @@ int main(){
     int index;
     //Pops all tower
 
-    // index = getRandomInt()
-
-    // p1Towers[0] 
-
-
-
-
-    // for(int i = 0; i < PLAYER_LOADOUT_SIZE; i++){
-
-    //     int p1Index = getRandomInt(0, TOWER_CT, p1UsedIndexes); //get a new, random tower that is not in p1's loadout (avoid dupes)
-
-    //      p1Towers[i] = towerList[p1Index]; //add that tower to p1's loadout
-    //     // std::cout << "Adding " << towerList[p1Index].getName() << '\n';
-
-
-    //     p1UsedIndexes.push_back(p1Index); //now that we used p1Index, we need to update the "used" towers
-
-
-    //     //do the exact same thing for player 2
-    //     int p2Index = getRandomInt(0, TOWER_CT, p2UsedIndexes);
-
-    //     p2Towers[i] = towerList[p2Index]; //add that tower to p1's loadout
-
-    //     p1UsedIndexes.push_back(p2Index); //now that we used p1Index, we need to update the "used" towers
+    
+    // std::cout << "------------pop TOWERS------------\n";
+    // for(Tower t : popsAllTowerList){
+    //     std::cout << t.getName() << '\n';
     // }
 
 
-    // std::cin.get();
-    // return 0;
+//Tower 1
+    index = getRandomInt(0, POPS_ALL_CT);
+
+    p1Towers[0] = towerList[index];
+
+    index = getRandomInt(0, POPS_ALL_CT);
+
+    p2Towers[0] = towerList[index];
+    
+//Tower 2
+    index = getRandomInt(0, HYPE_CT);
+
+    p1Towers[1] = hypeTowerList[index];
+
+    index = getRandomInt(0, HYPE_CT);
+
+    p2Towers[1] = hypeTowerList[index];
+
+//Tower 3
+    index = getRandomInt(0, TOWER_CT);
+
+    p1Towers[2] = popsAllTowerList[index];
+
+    index = getRandomInt(0, TOWER_CT);
+
+    p2Towers[2] = popsAllTowerList[index];
+    
 
 
     //Output Data
