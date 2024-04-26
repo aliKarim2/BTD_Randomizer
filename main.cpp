@@ -32,7 +32,7 @@ public:
 
 int getRandomInt(int start, int end);
 int getRandomInt(int start, int end, std::vector<int>& used);
-void fixDuplicates(const Tower towers[]);
+void fixDuplicates(const Tower towers[], std::vector<Tower> hypeList, std::vector<Tower> allList);
 
 
 bool operator==(const Tower& t1, const Tower& t2){
@@ -183,8 +183,8 @@ int main(){
 
 
 
-    fixDuplicates(p1Towers);
-    fixDuplicates(p2Towers);
+    fixDuplicates(p1Towers, hypeTowerList, towerList);
+    fixDuplicates(p2Towers, hypeTowerList, towerList);
 // bool duplicates = false;
 
 
@@ -291,8 +291,7 @@ int getRandomInt(int start, int end, std::vector<int>& used){
 
             return num;
         }
-void fixDuplicates(const Tower towers[]){
-    bool duplicates = false;
+void fixDuplicates(const Tower towers[], std::vector<Tower> hypeList, std::vector<Tower> allList){
 
 
     /*REROLL PRIORITY
@@ -308,21 +307,34 @@ void fixDuplicates(const Tower towers[]){
     If 1 and 3 match, reroll 3
     (basically rerolling the greater number index out of the two)
 
+    (note that we do not pass in the popsAll vector bc index 0 will never be rerolled)
+
     */
     do{
 
-        //checks if there are any duplicate towers
-        if(towers[0] == towers[1]){
+        //check if the allTower needs to be redone
+        if(towers[2] == towers[1] || towers[2] == towers[0]){
 
-            duplicates = true;
+            int index = getRandomInt(0, allList.size()-1);
 
+            towers[2] == allList[index];
 
+            //check the condition again
+            continue;
 
-
-        }else{
-            duplicates = false;
         }
+        if(towers[0] == towers[1]){
+            //reroll the tower
+            int index = getRandomInt(0, hypeList.size()-1);
+
+            towers[2] == hypeList[index];
+
+            //check the condition again
+            continue;
+        }
+        
+     
 
 
-    }while(duplicates);
+    }while(false);
 }
