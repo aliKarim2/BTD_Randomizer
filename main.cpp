@@ -6,6 +6,9 @@
 #include <random>
 #include <algorithm>
 
+
+
+
 class Tower{
     std::string name;
     bool popsAll;   //if tower can pop all types of balloons 
@@ -20,16 +23,21 @@ public:
     Tower() = default;
 
 
-    std::string getName(){return name;}
-    bool getPopsAll(){return popsAll;}
-    bool getHype(){return hype;}
+    std::string getName() const{return name;}
+    bool getPopsAll()const{return popsAll;}
+    bool getHype()const{return hype;}
 
 };
 
 
 int getRandomInt(int start, int end);
 int getRandomInt(int start, int end, std::vector<int>& used);
+void fixDuplicates(const Tower towers[]);
 
+
+bool operator==(const Tower& t1, const Tower& t2){
+    return (t1.getName() == t2.getName());
+}
 
 int main(){
     const int FW = 20;
@@ -174,6 +182,35 @@ int main(){
     
 
 
+
+    fixDuplicates(p1Towers);
+    fixDuplicates(p2Towers);
+// bool duplicates = false;
+
+
+// do{
+
+//     //checks if there are any duplicate towers
+//     if(p1Towers[0].getName() == p1Towers[1].getName() 
+//        || p1Towers[0].getName() == p1Towers[2].getName() 
+//        || p1Towers[1].getName() == p1Towers[2].getName()){
+
+
+
+//     }
+
+
+// }while(duplicates);
+
+
+//CHECK FOR DUPLICATE TOWERS
+
+if(p1Towers[0].getName() == p1Towers[1].getName() || p1Towers[0].getName() == p1Towers[2].getName()){
+
+}
+
+
+
     //Output Data
     {
         std::cout << std::left;
@@ -254,3 +291,38 @@ int getRandomInt(int start, int end, std::vector<int>& used){
 
             return num;
         }
+void fixDuplicates(const Tower towers[]){
+    bool duplicates = false;
+
+
+    /*REROLL PRIORITY
+    if there is a duplicate, the tower to get rerolled is the one with lowest priority
+
+    1. popsAll (index 0)
+    2. hype (index 1)
+    3. all towers (index 2)
+
+
+    For example, if index 0 and 1 are found to be matching, reroll index 1
+    If 1 and 2 match, reroll 2
+    If 1 and 3 match, reroll 3
+    (basically rerolling the greater number index out of the two)
+
+    */
+    do{
+
+        //checks if there are any duplicate towers
+        if(towers[0] == towers[1]){
+
+            duplicates = true;
+
+
+
+
+        }else{
+            duplicates = false;
+        }
+
+
+    }while(duplicates);
+}
