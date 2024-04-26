@@ -60,6 +60,18 @@ int main(){
     }
 
 
+    std::string input;
+    bool removeWaters = false;
+    std::cout << "Enter 1 to remove water towers or press any other key to continue...\n";
+    std::cin >> input;
+
+    removeWaters = (input == "1" ? true : false);
+
+
+    // std::cout << (removeWaters ? "removing towers\n" : "keeping towers\n");
+
+    // std::cin.get();
+    // return 0;
 
     //Read data into towerList vector
     {
@@ -77,6 +89,15 @@ int main(){
             //if its the first line (headers)
             if(name == "Name") 
                 continue;//we dont want it in our lists
+
+
+            //keep water towers out of the list if not water map
+            if(removeWaters){
+                if(name == "Buccaneer" || name == "Submarine"){
+                    continue;
+                }
+            }
+
 
             iss >> popsAll;
             iss >> hype;
@@ -102,6 +123,8 @@ int main(){
         
     const int PLAYER_LOADOUT_SIZE = 3;
     const int TOWER_CT = towerList.size()-1;
+    const int POPS_ALL_CT = popsAllTowerList.size() -1;
+    const int HYPE_CT = hypeTowerList.size() -1;
 
     std::vector<int> p1UsedIndexes;
     std::vector<int> p2UsedIndexes;
@@ -112,25 +135,34 @@ int main(){
         THIRD ELEMENT:      any tower
         */        
 
+    int index;
+    //Pops all tower
 
-    for(int i = 0; i < PLAYER_LOADOUT_SIZE; i++){
+    // index = getRandomInt()
 
-        int p1Index = getRandomInt(0, TOWER_CT, p1UsedIndexes); //get a new, random tower that is not in p1's loadout (avoid dupes)
-
-         p1Towers[i] = towerList[p1Index]; //add that tower to p1's loadout
-        // std::cout << "Adding " << towerList[p1Index].getName() << '\n';
-
-
-        p1UsedIndexes.push_back(p1Index); //now that we used p1Index, we need to update the "used" towers
+    // p1Towers[0] 
 
 
-        //do the exact same thing for player 2
-        int p2Index = getRandomInt(0, TOWER_CT), p2UsedIndexes;
 
-        p2Towers[i] = towerList[p2Index]; //add that tower to p1's loadout
 
-        p1UsedIndexes.push_back(p2Index); //now that we used p1Index, we need to update the "used" towers
-    }
+    // for(int i = 0; i < PLAYER_LOADOUT_SIZE; i++){
+
+    //     int p1Index = getRandomInt(0, TOWER_CT, p1UsedIndexes); //get a new, random tower that is not in p1's loadout (avoid dupes)
+
+    //      p1Towers[i] = towerList[p1Index]; //add that tower to p1's loadout
+    //     // std::cout << "Adding " << towerList[p1Index].getName() << '\n';
+
+
+    //     p1UsedIndexes.push_back(p1Index); //now that we used p1Index, we need to update the "used" towers
+
+
+    //     //do the exact same thing for player 2
+    //     int p2Index = getRandomInt(0, TOWER_CT, p2UsedIndexes);
+
+    //     p2Towers[i] = towerList[p2Index]; //add that tower to p1's loadout
+
+    //     p1UsedIndexes.push_back(p2Index); //now that we used p1Index, we need to update the "used" towers
+    // }
 
 
     // std::cin.get();
