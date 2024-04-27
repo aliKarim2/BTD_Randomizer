@@ -70,10 +70,10 @@ int main(){
 
     std::string input;
     bool removeWaters = false;
-    std::cout << "Enter 1 to remove water towers or press any other key to continue...\n";
-    std::cin >> input;
+    // std::cout << "Enter 1 to remove water towers or press any other key to continue...\n";----------------------
+    // std::cin >> input;
 
-    removeWaters = (input == "1" ? true : false);
+    // removeWaters = (input == "1" ? true : false);
 
 
     // std::cout << (removeWaters ? "removing towers\n" : "keeping towers\n");
@@ -122,6 +122,9 @@ int main(){
                 hypeTowerList.push_back(sampleTower);
 
             //towerList is the general list that gets all towers
+
+
+            std::cout << "Adding " << sampleTower.getName() << '\n';
             towerList.push_back(sampleTower);
 
         }
@@ -129,7 +132,6 @@ int main(){
     
     
         
-    const int PLAYER_LOADOUT_SIZE = 3;
     const int TOWER_CT = towerList.size()-1;
     const int POPS_ALL_CT = popsAllTowerList.size() -1;
     const int HYPE_CT = hypeTowerList.size() -1;
@@ -137,77 +139,76 @@ int main(){
     std::vector<int> p1UsedIndexes;
     std::vector<int> p2UsedIndexes;
 
+    std::cout << towerList[towerList.size()-1].getName() << '\n';
+
+
+    std::cout << "C1\n";
+
+//ASSIGN INITIAL TOWERS
+{
         /*PLAYER LOADOUT FORMATTING
-        FIRST ELEMENT:      popsAll
-        SECOND ELEMENT:     hype
-        THIRD ELEMENT:      any tower
+            FIRST ELEMENT:      popsAll
+            SECOND ELEMENT:     hype
+            THIRD ELEMENT:      any tower
         */        
 
-    int index;
-    //Pops all tower
-
+        int index;
     
-    // std::cout << "------------pop TOWERS------------\n";
-    // for(Tower t : popsAllTowerList){
-    //     std::cout << t.getName() << '\n';
-    // }
+     std::cout << "C2\n";
 
+    //Tower 1
+        index = getRandomInt(0, POPS_ALL_CT);
+ std::cout << "C3\n";
+        p1Towers[0] = popsAllTowerList[index];
+ std::cout << "C4\n";
+        index = getRandomInt(0, POPS_ALL_CT);
 
-//Tower 1
-    index = getRandomInt(0, POPS_ALL_CT);
+        p2Towers[0] = popsAllTowerList[index];
+        
 
-    p1Towers[0] = towerList[index];
+        std::cout << "C5\n";
+    //Tower 2
+        index = getRandomInt(0, HYPE_CT);
 
-    index = getRandomInt(0, POPS_ALL_CT);
+        p1Towers[1] = hypeTowerList[index];
 
-    p2Towers[0] = towerList[index];
-    
-//Tower 2
-    index = getRandomInt(0, HYPE_CT);
+        index = getRandomInt(0, HYPE_CT);
 
-    p1Towers[1] = hypeTowerList[index];
+        p2Towers[1] = hypeTowerList[index];
 
-    index = getRandomInt(0, HYPE_CT);
-
-    p2Towers[1] = hypeTowerList[index];
-
-//Tower 3
-    index = getRandomInt(0, TOWER_CT);
-
-    p1Towers[2] = popsAllTowerList[index];
-
-    index = getRandomInt(0, TOWER_CT);
-
-    p2Towers[2] = popsAllTowerList[index];
     
 
 
 
-    fixDuplicates(p1Towers, hypeTowerList, towerList);
-    fixDuplicates(p2Towers, hypeTowerList, towerList);
-// bool duplicates = false;
+ std::cout << "C6\n";
 
 
-// do{
+    for(Tower t : towerList){
+        std::cout << t.getName() << '\n';
+    }
 
-//     //checks if there are any duplicate towers
-//     if(p1Towers[0].getName() == p1Towers[1].getName() 
-//        || p1Towers[0].getName() == p1Towers[2].getName() 
-//        || p1Towers[1].getName() == p1Towers[2].getName()){
+    //Tower 3
+        index = getRandomInt(0, TOWER_CT);
 
+        p1Towers[2] = towerList[index];
 
+        index = getRandomInt(0, TOWER_CT);
 
-//     }
-
-
-// }while(duplicates);
-
-
-//CHECK FOR DUPLICATE TOWERS
-
-if(p1Towers[0].getName() == p1Towers[1].getName() || p1Towers[0].getName() == p1Towers[2].getName()){
-
+        p2Towers[2] = towerList[index];
 }
+
+
+    std::cout << "C99\n";
+
+
+//CHECK FOR DUPLICATE TOWER
+
+    // fixDuplicates(p1Towers, hypeTowerList, towerList);
+    // fixDuplicates(p2Towers, hypeTowerList, towerList);
+
+
+
+    
 
 
 
