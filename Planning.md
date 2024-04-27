@@ -13,13 +13,6 @@
    - Do the algorithm listed at bottom
 6. Present nicely
 
-# Checklist
-- [ ] Step 1
-- [ ] Step 2
-- [x] Step 3
-- [ ] Step 4
-- [ ] Step 5
-- [x] Step 6
 
 ## Tower Sorting Algorithm
 1. Check if map has water in it or not
