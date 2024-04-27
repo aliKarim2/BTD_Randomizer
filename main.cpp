@@ -24,15 +24,13 @@ public:
 
 
     std::string getName() const{return name;}
-    bool getPopsAll()const{return popsAll;}
-    bool getHype()const{return hype;}
+
 
 };
 
 
-int getRandomInt(int start, int end);
-int getRandomInt(int start, int end, std::vector<int>& used);
-void fixDuplicates(const Tower towers[], std::vector<Tower> hypeList, std::vector<Tower> allList);
+int getRandomInt(int start, int end); //random generating system
+void fixDuplicates(Tower towers[], std::vector<Tower> hypeList, std::vector<Tower> allList); 
 
 
 bool operator==(const Tower& t1, const Tower& t2){
@@ -70,16 +68,14 @@ int main(){
 
     std::string input;
     bool removeWaters = false;
-    // std::cout << "Enter 1 to remove water towers or press any other key to continue...\n";----------------------
-    // std::cin >> input;
+    std::cout << "Enter 1 to remove water towers or press any other key to continue...\n";
+    std::cin >> input;
 
-    // removeWaters = (input == "1" ? true : false);
+    removeWaters = (input == "1" ? true : false);
 
 
-    // std::cout << (removeWaters ? "removing towers\n" : "keeping towers\n");
+    std::cout << (removeWaters ? "Water Towers Disabled!\n" : "Water Towers Enabled!\n");
 
-    // std::cin.get();
-    // return 0;
 
     //Read data into towerList vector
     {
@@ -124,7 +120,6 @@ int main(){
             //towerList is the general list that gets all towers
 
 
-            std::cout << "Adding " << sampleTower.getName() << '\n';
             towerList.push_back(sampleTower);
 
         }
@@ -136,13 +131,7 @@ int main(){
     const int POPS_ALL_CT = popsAllTowerList.size() -1;
     const int HYPE_CT = hypeTowerList.size() -1;
 
-    std::vector<int> p1UsedIndexes;
-    std::vector<int> p2UsedIndexes;
-
-    std::cout << towerList[towerList.size()-1].getName() << '\n';
-
-
-    std::cout << "C1\n";
+   
 
 //ASSIGN INITIAL TOWERS
 {
@@ -154,19 +143,15 @@ int main(){
 
         int index;
     
-     std::cout << "C2\n";
-
     //Tower 1
-        index = getRandomInt(0, POPS_ALL_CT);
- std::cout << "C3\n";
-        p1Towers[0] = popsAllTowerList[index];
- std::cout << "C4\n";
+        index = getRandomInt(0, POPS_ALL_CT); //get random number
+
+        p1Towers[0] = popsAllTowerList[index]; //assign a tower from a random index
+
         index = getRandomInt(0, POPS_ALL_CT);
 
         p2Towers[0] = popsAllTowerList[index];
         
-
-        std::cout << "C5\n";
     //Tower 2
         index = getRandomInt(0, HYPE_CT);
 
@@ -175,17 +160,6 @@ int main(){
         index = getRandomInt(0, HYPE_CT);
 
         p2Towers[1] = hypeTowerList[index];
-
-    
-
-
-
- std::cout << "C6\n";
-
-
-    for(Tower t : towerList){
-        std::cout << t.getName() << '\n';
-    }
 
     //Tower 3
         index = getRandomInt(0, TOWER_CT);
@@ -198,29 +172,26 @@ int main(){
 }
 
 
-    std::cout << "C99\n";
-
-
 //CHECK FOR DUPLICATE TOWER
 
-    // fixDuplicates(p1Towers, hypeTowerList, towerList);
-    // fixDuplicates(p2Towers, hypeTowerList, towerList);
-
-
-
+    fixDuplicates(p1Towers, hypeTowerList, towerList);
+    fixDuplicates(p2Towers, hypeTowerList, towerList);
     
 
-
-
-    //Output Data
+//OUTPUT DATA
     {
         std::cout << std::left;
         std::cout << "\n\n";
 
+        std::cout << std::setw(50) << std::setfill('-') << "" << std::endl;    //line barrier
+        std::cout<< std::setfill(' ') << std::setw(0)  << "";    //line barrier end
+
         //output all of player 1's towers
         std::cout << "PLAYER 1:\n";
-        std::cout << "Tower 1: " << std::right << std::setw(FW) << p1Towers[0].getName() << '\n';
-        std::cout << "Tower 2: " << std::right << std::setw(FW) << p1Towers[1].getName() << '\n';
+        std::cout << "Tower 1: " << std::right << std::setw(FW) << p1Towers[0].getName();
+        std::cout << std::setw(FW) << "(POPS ALL)" << '\n';
+        std::cout << "Tower 2: " << std::right << std::setw(FW) << p1Towers[1].getName();
+        std::cout << std::setw(FW) << "(HYPE)" << '\n';
         std::cout << "Tower 3: " << std::right << std::setw(FW) << p1Towers[2].getName() << '\n';
 
         std::cout << std::setw(50) << std::setfill('-') << "" << std::endl;    //line barrier
@@ -228,9 +199,11 @@ int main(){
 
         //output all of player 2's towers
         std::cout << "PLAYER 2:\n";
-        std::cout << "Tower 1: " << std::right << std::setw(FW) << p2Towers[0].getName() << '\n';
-        std::cout << "Tower 2: " << std::right << std::setw(FW) << p2Towers[1].getName() << '\n';
-        std::cout << "Tower 3: " << std::right << std::setw(FW) << p2Towers[2].getName() << '\n';
+        std::cout << "Tower 1: " << std::right << std::setw(FW) << p2Towers[0].getName();
+        std::cout << std::setw(FW) << "(POPS ALL)" << '\n';
+        std::cout << "Tower 2: " << std::right << std::setw(FW) << p2Towers[1].getName();
+        std::cout << std::setw(FW) << "(HYPE)" << '\n';
+        std::cout << "Tower 3: " << std::right << std::setw(FW) << p2Towers[2].getName()<< '\n';
 
 
 
@@ -259,40 +232,8 @@ int getRandomInt(int start, int end){
             // Generate and print a random number
             return distribution(gen);
         }
-int getRandomInt(int start, int end, std::vector<int>& used){
-            int num;
-            // Set up a random number generator
-            static std::random_device rd;  // Use hardware entropy if available
 
-            std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
-
-            // Generate and print a random number
-
-            // Define a distribution (for example, integers between 1 and 100)
-                std::uniform_int_distribution<> distribution(start, end);
-            if(!used.empty()){
-                do{
-                    num = distribution(gen); //make new number
-
-                    //find returns used.end() if num is nowhere to be seen in the vector
-                    if(std::find(used.begin(), used.end(), num) == used.end()){ //checks if num is already in used
-                        //we found good number
-                        break;
-                    }
-
-                }while(true);
-            }
-            else{
-                num = distribution(gen);
-            }
-            
-
-
-
-
-            return num;
-        }
-void fixDuplicates(const Tower towers[], std::vector<Tower> hypeList, std::vector<Tower> allList){
+void fixDuplicates(Tower towers[], std::vector<Tower> hypeList, std::vector<Tower> allList){
 
 
     /*REROLL PRIORITY
@@ -303,9 +244,10 @@ void fixDuplicates(const Tower towers[], std::vector<Tower> hypeList, std::vecto
     3. all towers (index 2)
 
 
-    For example, if index 0 and 1 are found to be matching, reroll index 1
-    If 1 and 2 match, reroll 2
-    If 1 and 3 match, reroll 3
+    For example:
+    If 0 and 1 match, reroll 2
+    If 1 and 2 match, reroll 3
+    If 0 and 2 match, reroll 2
     (basically rerolling the greater number index out of the two)
 
     (note that we do not pass in the popsAll vector bc index 0 will never be rerolled)
@@ -318,23 +260,24 @@ void fixDuplicates(const Tower towers[], std::vector<Tower> hypeList, std::vecto
 
             int index = getRandomInt(0, allList.size()-1);
 
-            towers[2] == allList[index];
+            towers[2] = allList[index];
 
             //check the condition again
             continue;
 
         }
         if(towers[0] == towers[1]){
+
             //reroll the tower
             int index = getRandomInt(0, hypeList.size()-1);
 
-            towers[2] == hypeList[index];
+            towers[1] = hypeList[index];
 
             //check the condition again
             continue;
         }
         
-     
+    //  std::cout << "DUPE FOUND, change tower 2\n";
 
 
     }while(false);
